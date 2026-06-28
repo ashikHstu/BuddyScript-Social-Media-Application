@@ -20,10 +20,6 @@ const { data: session } = useSession();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-//   if(session)
-// {
-//   redirect("/feed");
-// }
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -134,7 +130,6 @@ const { data: session } = useSession();
                 </div>
               </form>
             </AuthRightContent>
-
           </div>
         </div>
       </div>

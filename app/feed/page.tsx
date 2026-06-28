@@ -1,11 +1,6 @@
 "use client";
-
-// import React, { useState } from 'react';
-// import ThemeToggler from '../components/ThemeToggler';
 import Navbar from '../components/Navbar';
 import { redirect } from "next/navigation";
-
-// import ThemeToggle from './../components/ThemeToggle';
 import LeftColumn from './../components/LeftColumn';
 import MiddleColumn from './../components/MiddleColumn';
 import RightColumn from './../components/RightColumn';
@@ -13,8 +8,7 @@ import { useSession } from "next-auth/react";
 import LoadingPage from './../components/LoadingPage';
 
 export default function App() {
-  // const [isDarkMode, setIsDarkMode] = useState(false);
-// const currentUser = { name: "Ashik Rahman" };
+
 const { data: session, status } = useSession();
 
 if(status==="loading")
@@ -31,10 +25,6 @@ const headerOffset = 120;
 
   return (
     <div >
-      {/* Switching Toggle Button Component */}
-      {/* <ThemeToggle/> */}
-      {/* <ThemeToggler isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} /> */}
-      
       <div className="_main_layout">
         {/* Navigation Bar Header */}
         <Navbar userName={session.user.name}/>

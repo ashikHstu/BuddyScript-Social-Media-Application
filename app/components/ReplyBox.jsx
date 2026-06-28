@@ -11,12 +11,12 @@ export default function ReplyBox({ parentId }) {
     await fetch("/api/comments/reply", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         parentId,
-        content: text
-      })
+        content: text,
+      }),
     });
 
     setText("");

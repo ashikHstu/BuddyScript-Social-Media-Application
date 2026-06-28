@@ -8,10 +8,10 @@ import { signOut } from "next-auth/react";
 const NavBar = ({ userName = "Dylan Field" }) => {
   const [isNotifyOpen, setIsNotifyOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-const handleLogout = async () => {
-  // This clears the NextAuth session and redirects the user
-  await signOut({ callbackUrl: "/login" });
-};
+  const handleLogout = async () => {
+    // This clears the NextAuth session and redirects the user
+    await signOut({ callbackUrl: "/login" });
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light _header_nav _padd_t1">
       <div className="container _custom_container">
@@ -28,8 +28,6 @@ const handleLogout = async () => {
             />
           </Link>
         </div>
-
-        {/* ... rest of your component remains the same */}
 
         <div
           id="navbarSupportedContent"
@@ -154,50 +152,53 @@ const handleLogout = async () => {
                 <span className="_counting">2</span>
               </Link>
             </li>
-<li className="nav-item _header_nav_item _header_nav_profile">
-  <div className="_header_nav_profile_image">
-    <Image
-      src="/assets/images/profile.png"
-      alt="Profile"
-      width={40}
-      height={40}
-      className="_nav_profile_img"
-    />
-  </div>
+            <li className="nav-item _header_nav_item _header_nav_profile">
+              <div className="_header_nav_profile_image">
+                <Image
+                  src="/assets/images/profile.png"
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="_nav_profile_img"
+                />
+              </div>
 
-  <div className="_header_nav_dropdown" style={{ position: "relative" }}>
-    <p className="_header_nav_para">{userName}</p>
+              <div
+                className="_header_nav_dropdown"
+                style={{ position: "relative" }}
+              >
+                <p className="_header_nav_para">{userName}</p>
 
-    {/* Toggle Button */}
-    <button
-      onClick={() => setIsProfileOpen(!isProfileOpen)}
-      className="_header_nav_dropdown_btn _dropdown_toggle"
-      type="button"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="10"
-        height="6"
-        fill="none"
-        viewBox="0 0 10 6"
-      >
-        <path
-          fill="#112032"
-          d="M5 5l.354.354L5 5.707l-.354-.353L5 5zm4.354-3.646l-4 4-.708-.708 4-4 .708.708zm-4.708 4l-4-4 .708-.708 4 4-.708.708z"
-        />
-      </svg>
-    </button>
+                {/* Toggle Button */}
+                <button
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className="_header_nav_dropdown_btn _dropdown_toggle"
+                  type="button"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="6"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      fill="#112032"
+                      d="M5 5l.354.354L5 5.707l-.354-.353L5 5zm4.354-3.646l-4 4-.708-.708 4-4 .708.708zm-4.708 4l-4-4 .708-.708 4 4-.708.708z"
+                    />
+                  </svg>
+                </button>
 
-    {/* Dropdown Menu */}
-    {isProfileOpen && (
-      <div className="_header_nav_dropdown">
-        <button onClick={handleLogout} className="_logout_btn">
-          Logout
-        </button>
-      </div>
-    )}
-  </div>
-</li>
+                {/* Dropdown Menu */}
+                {isProfileOpen && (
+                  <div className="_header_nav_dropdown">
+                    <button onClick={handleLogout} className="_logout_btn">
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </li>
           </ul>
         </div>
       </div>

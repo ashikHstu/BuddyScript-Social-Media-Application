@@ -15,18 +15,16 @@ export default function LoadingPage() {
       backgroundColor: '#ffffff',
       fontFamily: 'sans-serif'
     }}>
-      {/* Your Logo */}
       <div style={{ marginBottom: '20px' }}>
         <Image 
-          src="/assets/images/logo-copy.svg" // Ensure this path is correct
+          src="/assets/images/logo-copy.svg" 
           alt="Buddy Script Logo"
           width={120}
           height={120}
-          priority // Ensures logo loads fast
+          priority 
         />
       </div>
 
-      {/* App Name */}
       <h1 style={{ 
         fontSize: '24px', 
         fontWeight: 'bold', 
@@ -41,7 +39,7 @@ export default function LoadingPage() {
         width: '40px',
         height: '40px',
         border: '4px solid #f3f3f3',
-        borderTop: '4px solid #3498db', // Change this to your brand color
+        borderTop: '4px solid #3498db',
         borderRadius: '50%',
         animation: 'spin 1s linear infinite'
       }} />

@@ -10,7 +10,6 @@ export default function CreatePost({ onPostCreated }) {
   const [isPublic, setIsPublic] = useState(true);
   const [loading, setLoading] = useState(false);
 
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -106,7 +105,6 @@ export default function CreatePost({ onPostCreated }) {
         </div>
       </div>
 
-      {/* ✅ IMAGE PREVIEW (MOVED HERE, BEFORE BUTTON ROW) */}
       {preview && (
         <div style={{ marginTop: "10px" }}>
           <Image
