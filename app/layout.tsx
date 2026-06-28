@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono,Poppins } from "next/font/google";
 import "./globals.css";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "@/public/assets/css/bootstrap.min.css"
 import "@/public/assets/css/main.css"
 import "@/public/assets/css/responsive.css"
 // import "@/public/assets/css/extra-design.css"
 import "@/public/assets/css/common.css"
-
+import Providers from "./provider";
 
 // 2. Load the Poppins font with the exact weights requested in the HTML tag
 const poppins = Poppins({
@@ -34,8 +34,9 @@ export default function RootLayout({
       
     >
       <body className={poppins.className}>
-
-        {children}</body>
+      <Providers> {children}</Providers>
+    
+        </body>
     </html>
   );
 }

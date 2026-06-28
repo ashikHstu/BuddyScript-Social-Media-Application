@@ -2,37 +2,49 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthBackground from "../components/auth/AuthBackground";
 import AuthLeftHero from "../components/auth/AuthLeftHero";
 import AuthRightContent from "../components/auth/AuthRightContent";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signIn("credentials", {
+    setError("");
+    setLoading(true);
+
+    const res = await signIn("credentials", {
       email,
       password,
-      redirect: true,
-      callbackUrl: "/feed",
+      redirect: false,
     });
+
+    setLoading(false);
+
+    if (res?.error) {
+      setError("Invalid email address or password combination.");
+    } else {
+      router.push("/feed");
+      router.refresh();
+    }
   };
 
   return (
     <section className="_social_login_wrapper _layout_main_wrapper">
       <AuthBackground />
-
       <div className="_social_login_wrap">
         <div className="container">
           <div className="row align-items-center">
             
-            {/* Reusable Left Illustration Side */}
             <AuthLeftHero type="login" />
 
-            {/* Reusable Right Content Wrapper */}
             <AuthRightContent
               type="login"
               subtitle="Welcome back"
@@ -40,12 +52,18 @@ export default function LoginPage() {
               googleBtnText="Or sign-in with google"
               footerLink={
                 <p className="_social_login_bottom_txt_para">
-                  Dont have an account? <Link href="/register">Create New Account</Link>
+                  Don't have an account? <Link href="/register">Create New Account</Link>
                 </p>
               }
             >
-              {/* Form Input elements matching style selectors perfectly */}
               <form className="_social_login_form" onSubmit={handleLogin}>
+                
+                {error && (
+                  <div className="alert alert-danger p-2" style={{ fontSize: "14px" }}>
+                    {error}
+                  </div>
+                )}
+
                 <div className="row">
                   <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div className="_social_login_form_input _mar_b14">
@@ -77,17 +95,12 @@ export default function LoginPage() {
                 <div className="row">
                   <div className="col-lg-6 col-xl-6 col-md-6 col-sm-12">
                     <div className="form-check _social_login_form_check">
-                      <input
-                        className="form-check-input _social_login_form_check_input"
-                        type="checkbox"
-                        id="rememberMe"
-                      />
+                      <input className="form-check-input" type="checkbox" id="rememberMe" />
                       <label className="form-check-label _social_login_form_check_label" htmlFor="rememberMe">
                         Remember me
                       </label>
                     </div>
                   </div>
-
                   <div className="col-lg-6 col-xl-6 col-md-6 col-sm-12">
                     <div className="_social_login_form_left">
                       <p className="_social_login_form_left_para" style={{ cursor: "pointer" }}>
@@ -100,8 +113,12 @@ export default function LoginPage() {
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-xl-12 col-sm-12">
                     <div className="_social_login_form_btn _mar_t40 _mar_b60">
-                      <button type="submit" className="_social_login_form_btn_link _btn1">
-                        Login now
+                      <button 
+                        type="submit" 
+                        className="_social_login_form_btn_link _btn1"
+                        disabled={loading}
+                      >
+                        {loading ? "Authenticating..." : "Login now"}
                       </button>
                     </div>
                   </div>
