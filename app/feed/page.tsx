@@ -4,21 +4,31 @@
 // import ThemeToggler from '../components/ThemeToggler';
 import Navbar from '../components/Navbar';
 import { redirect } from "next/navigation";
+
 // import ThemeToggle from './../components/ThemeToggle';
 import LeftColumn from './../components/LeftColumn';
 import MiddleColumn from './../components/MiddleColumn';
 import RightColumn from './../components/RightColumn';
 import { useSession } from "next-auth/react"; 
+import LoadingPage from './../components/LoadingPage';
 
 export default function App() {
   // const [isDarkMode, setIsDarkMode] = useState(false);
 // const currentUser = { name: "Ashik Rahman" };
-const { data: session } = useSession();
-const headerOffset = 120;
-if(!session)
+const { data: session, status } = useSession();
+
+if(status==="loading")
+{
+  return (
+    <div> <LoadingPage/></div>
+  );
+}
+else if(status=="unauthenticated")
 {
   redirect("/login");
 }
+const headerOffset = 120;
+
   return (
     <div >
       {/* Switching Toggle Button Component */}

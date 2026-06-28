@@ -7,14 +7,23 @@ import Link from "next/link";
 import AuthBackground from "../components/auth/AuthBackground";
 import AuthLeftHero from "../components/auth/AuthLeftHero";
 import AuthRightContent from "../components/auth/AuthRightContent";
+import { useSession } from "next-auth/react"; 
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
+  
+const { data: session } = useSession();
+
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+//   if(session)
+// {
+//   redirect("/feed");
+// }
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -115,7 +124,7 @@ export default function LoginPage() {
                     <div className="_social_login_form_btn _mar_t40 _mar_b60">
                       <button 
                         type="submit" 
-                        className="_social_login_form_btn_link _btn1"
+                        className="_btn_login1"
                         disabled={loading}
                       >
                         {loading ? "Authenticating..." : "Login now"}

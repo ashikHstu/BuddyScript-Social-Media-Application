@@ -21,6 +21,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Buddy Script",
   description: "Buddy Script app",
+  icons: {
+    icon: "/assets/images/logo-copy.svg", // Path relative to the 'public' folder
+  },
 };
 
 export default function RootLayout({
